@@ -2,6 +2,7 @@ package ut5.reto1.ruleta.mansilla.piña;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -15,7 +16,6 @@ public class Jugadores {
 	public List<String> getNombre() {
 		return nombre;
 	}
-
 
 	public List<Integer> getSaldo() {
 		return saldo;
@@ -42,18 +42,17 @@ public class Jugadores {
 	}
 	
 	public char indicarConsonante(){
-		char consonante=' ';
-		return consonante;
+		Scanner teclado = new Scanner(System.in, "ISO-8859-1");
+		return teclado.nextLine().charAt(0);
 	}
 	
 	public char comprarLetra(){
-		char letra=' ';
-		return letra;
+		Scanner teclado = new Scanner(System.in, "ISO-8859-1");
+		return teclado.nextLine().charAt(0);
 	}
 	
 	public String resolverPanel(){
-		String solucion="";
-		return solucion;
-	}
-	
+		Scanner teclado = new Scanner(System.in, "ISO-8859-1");
+		return teclado.nextLine();
+	}	
 }
