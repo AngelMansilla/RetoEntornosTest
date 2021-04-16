@@ -12,6 +12,7 @@ public class Jugadores {
 	private	List<String> nombre = new ArrayList<>();
 	private	List<Integer> saldo = new ArrayList<>();
 	private	List<Integer> saldoTotal = new ArrayList<>();
+	private Scanner teclado = new Scanner(System.in, "ISO-8859-1");
 
 	public List<String> getNombre() {
 		return nombre;
@@ -42,17 +43,14 @@ public class Jugadores {
 	}
 	
 	public char indicarConsonante(){
-		Scanner teclado = new Scanner(System.in, "ISO-8859-1");
-		return teclado.nextLine().charAt(0);
+		return this.teclado.nextLine().charAt(0);
 	}
 	
 	public char comprarLetra(){
-		Scanner teclado = new Scanner(System.in, "ISO-8859-1");
-		return teclado.nextLine().charAt(0);
+		return this.teclado.nextLine().charAt(0);
 	}
 	
 	public String resolverPanel(){
-		Scanner teclado = new Scanner(System.in, "ISO-8859-1");
-		return teclado.nextLine();
+		return this.teclado.nextLine();
 	}	
 }
