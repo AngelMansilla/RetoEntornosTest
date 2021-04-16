@@ -7,9 +7,12 @@ package ut5.reto1.ruleta.mansilla.piña;
 public class Codec {
 	private String panel;
 	private String panelCod;
+	private int contLetra;
 
 	public Codec(String panel) {
 		this.panel = panel;
+		this.contLetra=0;
+		this.panelCod="";
 	}
 
 	public String getPanel() {
@@ -19,11 +22,15 @@ public class Codec {
 	public String getPanelCod() {
 		return panelCod;
 	}
+	
+	public int getConLetra() {
+		return contLetra;
+	}
 	/**
 	 * Ciframos el panel cambiando las letras por el caracter seleccionado para
 	 * cifrarlo.
 	 *
-	 * @param caracter El caracter al que vamos a cambiar
+	 * @param caracter El caracter al que vamos a cambiar.
 	 */
 	public void codificar(char caracter){
 		StringBuilder str = new StringBuilder(this.panel);
@@ -48,6 +55,7 @@ public class Codec {
 				aux += this.panel.charAt(i);
 				str.replace(i, i + 1, aux);
 				correcto = true;
+				this.contLetra++;
 			}
 		}
 		this.panelCod=str.toString();

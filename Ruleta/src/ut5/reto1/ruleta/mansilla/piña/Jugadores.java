@@ -9,10 +9,17 @@ import java.util.Scanner;
  * @author Ángel Mansilla y Carlos Piña
  */
 public class Jugadores {
-	private	List<String> nombre = new ArrayList<>();
-	private	List<Integer> saldo = new ArrayList<>();
-	private	List<Integer> saldoTotal = new ArrayList<>();
-	private Scanner teclado = new Scanner(System.in, "ISO-8859-1");
+	private	List<String> nombre;
+	private	List<Integer> saldo;
+	private	List<Integer> saldoTotal;
+	private Scanner teclado;
+
+	public Jugadores() {
+		this.nombre = new ArrayList<>();
+		this.saldo = new ArrayList<>();
+		this.saldoTotal = new ArrayList<>();
+		this.teclado = new Scanner(System.in, "ISO-8859-1");
+	}
 
 	public List<String> getNombre() {
 		return nombre;
@@ -31,9 +38,19 @@ public class Jugadores {
 		this.saldo.add(0);
 		this.saldoTotal.add(0);
 	}
-	// Realizar la quiebra y el reset de saldo, desde este metodo o crear uno para cada cosa.
+
 	public void modificarSaldo(int id, int saldo){
 		this.saldo.add(id, saldo);
+	}
+	
+	public void resetSaldo(){
+		for (int i = 0; i < this.saldo.size(); i++) {
+			this.saldo.add(i, 0);
+		}
+	}
+	
+	public void saldo0(int i){
+		this.saldo.add(i, 0);
 	}
 	
 	public void actualizarSaldoTotal(){

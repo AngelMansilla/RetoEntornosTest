@@ -9,8 +9,8 @@ import java.util.Random;
  * @author Ángel Mansilla y Carlos Piña
  */
 public class Ruleta {
-	private Random random = new Random();
-	private Map<Integer, Double> premios = new HashMap<>();
+	private Random random;
+	private Map<Integer, Double> premios;
 
 	/**
 	 * Se guardan los premios de la ruleta (premio,probabilidad), esta debe ser en total un 100% de probabilidad
@@ -20,6 +20,8 @@ public class Ruleta {
 	 * Caso de -4 sera Una vocal de regalo
 	 */
 	public Ruleta() {
+		this.random = new Random();
+		this.premios = new HashMap<>();
 		this.premios.put(-1,7.5);
 		this.premios.put(-2,7.5);
 		this.premios.put(0,10.0);
