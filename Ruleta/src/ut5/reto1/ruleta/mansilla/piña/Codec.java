@@ -23,7 +23,7 @@ public class Codec {
 	 * Ciframos el panel cambiando las letras por el caracter seleccionado para
 	 * cifrarlo.
 	 *
-	 * @param caracter El caracter a cambiar
+	 * @param caracter El caracter al que vamos a cambiar
 	 */
 	public void codificar(char caracter){
 		StringBuilder str = new StringBuilder(this.panel);
