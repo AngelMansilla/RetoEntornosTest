@@ -68,6 +68,7 @@ public class Jugadores {
 
 	public char indicarConsonante() {
 		char consonante;
+		System.out.println("Escribe una consonante");
 		do{	
 			consonante=this.teclado.nextLine().toLowerCase().charAt(0);
 			if (ifVocal(consonante)) {
@@ -77,12 +78,13 @@ public class Jugadores {
 		return consonante;
 	}
 
-	public char comprarVocal() {
+	public char indicarVocal() {
 		char vocal;
+		System.out.println("Escribe una vocal");
 		do{	
 			vocal=this.teclado.nextLine().toLowerCase().charAt(0);
 			if (!ifVocal(vocal)) {
-				System.out.println("Introduce una consonante");
+				System.out.println("Introduce una vocal");
 			}
 		}while(!ifVocal(vocal));
 		return vocal;

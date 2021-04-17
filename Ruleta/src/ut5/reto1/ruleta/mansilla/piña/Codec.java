@@ -29,8 +29,12 @@ public class Codec {
 		return panelCod;
 	}
 
-	public int getConLetra() {
+	public int getContLetra() {
 		return contLetra;
+	}
+
+	public Set<Character> getLetrasDichas() {
+		return letrasDichas;
 	}
 	
 	/**
@@ -76,5 +80,9 @@ public class Codec {
 
 	public boolean comprobarPanel(String solucion) {
 		return this.panel.equalsIgnoreCase(solucion);
+	}
+	
+	public boolean vocalesDichas(){
+		return (this.letrasDichas.contains('a') && this.letrasDichas.contains('e') && this.letrasDichas.contains('i') && this.letrasDichas.contains('o') && this.letrasDichas.contains('u'));
 	}
 }

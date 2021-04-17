@@ -19,6 +19,7 @@ public class Main {
 		boolean panelCorrecto=false;
 		int numJugadores = numJugadores();
 		int numPaneles = numPaneles();
+		boolean saldoDisponible;
 		introducirJugadores(numJugadores, jugadores);
 		jugadores.azarTurno();
 		for (int i = 1; i <= numPaneles; i++) {
@@ -38,7 +39,19 @@ public class Main {
 				if(!eleccionRuleta(ruleta.tirarRuleta(), jugadores, codec)){
 					System.out.println(codec.getPanelCod());
 					System.out.println(paneles.getPista());
-					panelCorrecto=resolver(codec, jugadores);
+					do{
+						saldoDisponible = true;
+						switch (menuJugador()) {
+							case 2:
+								System.out.println(codec.getPanelCod());
+								System.out.println(paneles.getPista());
+								panelCorrecto=resolver(codec, jugadores);
+								break;
+							case 3: 
+								saldoDisponible=comprarVocal(codec, jugadores);
+								break;
+						}
+					}while(!saldoDisponible);
 				}
 			} while (!panelCorrecto);
 			jugadores.actualizarSaldoTotal();
@@ -92,16 +105,21 @@ public class Main {
 				System.out.println("Has caido en tirar de nuevo");
 				break;
 			case -4:
-				System.out.println("Has caido en regalo de vocal, elige una vocal entre las no dichas aún y vuelve a tirar");
-				if (codec.acierto(jugadores.comprarVocal())) {
-					System.out.printf("Acertaste %d vocales\n", codec.getConLetra());
+				System.out.println("Has caido en regalo de vocal");
+				if (codec.vocalesDichas()) {
+					System.out.println("Pero no quedan vocales que decir");
+				}else{
+					System.out.println("Elige una vocal entre las no dichas aún y vuelve a tirar");
+					if (codec.acierto(jugadores.indicarVocal())) {
+						System.out.printf("Acertaste %d vocales\n", codec.getContLetra());
+					}
 				}
 				break;
 			default:
-				System.out.printf("Has caido en %d €\nDime una consonante\n", premio);
+				System.out.printf("Has caido en %d €\n", premio);
 				if (codec.acierto(jugadores.indicarConsonante())) {
-					System.out.printf("Acertaste %d consonantes\n", codec.getConLetra());
-					jugadores.sumarSaldo(jugadores.getTurno(), (premio*codec.getConLetra()));
+					System.out.printf("Acertaste %d consonantes\n", codec.getContLetra());
+					jugadores.sumarSaldo(jugadores.getTurno(), (premio*codec.getContLetra()));
 				}else{
 					System.out.println("Fallaste, perdiste el turno");
 					jugadores.pasarTurno();
@@ -112,14 +130,29 @@ public class Main {
 	}
 	
 	public static boolean resolver(Codec codec, Jugadores jugadores){
-		Scanner teclado = new Scanner(System.in, "ISO-8859-1");
-		char op;
-		boolean correcto=false;
-		System.out.println("¿Quieres resolver el panel? (S/N)");
-		op = teclado.nextLine().charAt(0);
-		if (op == 's' || op == 'S') {
-			correcto=codec.comprobarPanel(jugadores.resolverPanel());
+		return codec.comprobarPanel(jugadores.resolverPanel());
+	}
+	
+	public static boolean comprarVocal(Codec codec, Jugadores jugadores){
+		boolean saldoDisponible=(jugadores.getSaldo(jugadores.getTurno())>=50);
+		if (saldoDisponible) {
+			jugadores.sumarSaldo(jugadores.getTurno(), -50);
+			if (!codec.acierto(jugadores.indicarVocal())) {
+				jugadores.pasarTurno();
+			}
 		}
-		return correcto;
+		return saldoDisponible;
+	}
+	
+	public static int menuJugador(){
+		Scanner teclado = new Scanner(System.in, "ISO-8859-1");
+		int op;
+		do{
+			System.out.println("1 - Volver a tirar");
+			System.out.println("2 - Resolver el panel");
+			System.out.println("3 - Comprar vocal");
+			op=Integer.parseInt(teclado.nextLine());
+		}while(op<1 || op>3);
+		return op;
 	}
 }
