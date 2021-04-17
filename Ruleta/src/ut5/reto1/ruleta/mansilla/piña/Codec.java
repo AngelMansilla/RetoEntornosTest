@@ -5,14 +5,15 @@ package ut5.reto1.ruleta.mansilla.piña;
  * @author Ángel Mansilla y Carlos Piña
  */
 public class Codec {
+
 	private String panel;
 	private String panelCod;
 	private int contLetra;
 
 	public Codec(String panel) {
 		this.panel = panel;
-		this.contLetra=0;
-		this.panelCod="";
+		this.contLetra = 0;
+		this.panelCod = "";
 	}
 
 	public String getPanel() {
@@ -22,17 +23,18 @@ public class Codec {
 	public String getPanelCod() {
 		return panelCod;
 	}
-	
+
 	public int getConLetra() {
 		return contLetra;
 	}
+	
 	/**
-	 * Ciframos el panel cambiando las letras por el caracter seleccionado para
-	 * cifrarlo.
+	 * Ciframos el panel cambiando las letras por el caracter seleccionado
+	 * para cifrarlo.
 	 *
 	 * @param caracter El caracter al que vamos a cambiar.
 	 */
-	public void codificar(char caracter){
+	public void codificar(char caracter) {
 		StringBuilder str = new StringBuilder(this.panel);
 		String aux = "" + caracter;//Creamos el String para poder utilizara el .replace
 		int longitud = this.panel.length();
@@ -41,13 +43,14 @@ public class Codec {
 				str.replace(i, i + 1, aux);
 			}
 		}
-		this.panelCod=str.toString();
+		this.panelCod = str.toString();
 	}
-	
-	public boolean acierto(char letra){
+
+	public boolean acierto(char letra) {
 		StringBuilder str = new StringBuilder(this.panelCod);
-		boolean correcto=false;
+		boolean correcto = false;
 		String aux;
+		this.contLetra=0;
 		for (int i = 0; i < this.panel.length(); i++) {
 			aux = "";
 			if (this.panel.toLowerCase().charAt(i) == letra
@@ -58,11 +61,11 @@ public class Codec {
 				this.contLetra++;
 			}
 		}
-		this.panelCod=str.toString();
+		this.panelCod = str.toString();
 		return correcto;
 	}
-	
-	public boolean comprobarPanel(String solucion){
+
+	public boolean comprobarPanel(String solucion) {
 		return this.panel.equalsIgnoreCase(solucion);
 	}
 }

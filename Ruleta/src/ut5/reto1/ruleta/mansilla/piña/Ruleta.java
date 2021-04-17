@@ -37,7 +37,7 @@ public class Ruleta {
 	
 	public int tirarRuleta(){
 		int probabilidadAnterior=0;
-		double azar = random.nextDouble()*100+1;
+		double azar = random.nextDouble() * 100 + 1;
 		int premio=0;
 		for (Map.Entry<Integer, Double> entry : this.premios.entrySet()) {
 			probabilidadAnterior += entry.getValue();
