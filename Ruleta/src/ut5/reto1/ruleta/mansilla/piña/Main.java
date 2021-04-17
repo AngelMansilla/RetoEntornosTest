@@ -60,9 +60,9 @@ public class Main {
 		Scanner teclado = new Scanner(System.in, "ISO-8859-1");
 		int numPaneles;
 		do {
-			System.out.println("¿Cuantos paneles vas a jugar?(1-10)");
+			System.out.println("¿Cuantos paneles vas a jugar?(1-15)");
 			numPaneles = Integer.parseInt(teclado.nextLine());
-		} while (numPaneles < 1 || numPaneles > 10);
+		} while (numPaneles < 1 || numPaneles > 15);
 		return numPaneles;
 	}
 
