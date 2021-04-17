@@ -16,7 +16,7 @@ public class Main {
 		Jugadores jugadores = new Jugadores();
 		Ruleta ruleta = new Ruleta();
 		Paneles paneles = new Paneles();
-		boolean mismoPanel = true;
+		boolean panelCorrecto=false;
 		int numJugadores = numJugadores();
 		int numPaneles = numPaneles();
 		introducirJugadores(numJugadores, jugadores);
@@ -28,20 +28,22 @@ public class Main {
 			System.out.printf("Panel número %d\n", i);
 			do {
 				for (int j = 0; j < numJugadores; j++) {
-
-					System.out.printf("Nombre: %s Saldo: %d SaldoTotal: %d\n", jugadores.getNombre(i), jugadores.getSaldo(i), jugadores.getSaldoTotal(i));
+					System.out.printf("Nombre: %s Saldo: %d SaldoTotal: %d\n", jugadores.getNombre(j), jugadores.getSaldo(j), jugadores.getSaldoTotal(j));
 				}
 				System.out.println(codec.getPanelCod());
 				System.out.println(paneles.getPista());
 				System.out.printf("Turno de: %s\n", jugadores.getNombre(jugadores.getTurno()));
 				System.out.println("Tira de la ruleta (pulsa enter)");
 				teclado.nextLine();
-				eleccionRuleta(ruleta.tirarRuleta(), jugadores, codec);
-			} while (mismoPanel);
+				if(!eleccionRuleta(ruleta.tirarRuleta(), jugadores, codec)){
+					System.out.println(codec.getPanelCod());
+					System.out.println(paneles.getPista());
+					panelCorrecto=resolver(codec, jugadores);
+				}
+			} while (!panelCorrecto);
 			jugadores.actualizarSaldoTotal();
 		}
 		System.out.println("Termino el juego");
-
 	}
 
 	public static int numJugadores() {
@@ -72,16 +74,19 @@ public class Main {
 		}
 	}
 
-	public static void eleccionRuleta(int premio, Jugadores jugadores, Codec codec) {
+	public static boolean eleccionRuleta(int premio, Jugadores jugadores, Codec codec) {
+		boolean perdioTurno=false;
 		switch (premio) {
 			case -1:
 				System.out.println("Has caido en quiebra tu saldo pasa a 0 y pierdes turno");
 				jugadores.saldo0(jugadores.getTurno());
 				jugadores.pasarTurno();
+				perdioTurno=true;
 				break;
 			case -2:
 				System.out.println("Has caido en pierde turno");
 				jugadores.pasarTurno();
+				perdioTurno=true;
 				break;
 			case -3:
 				System.out.println("Has caido en tirar de nuevo");
@@ -93,15 +98,28 @@ public class Main {
 				}
 				break;
 			default:
-				System.out.printf("Has caido en %d €\n", premio);
+				System.out.printf("Has caido en %d €\nDime una consonante\n", premio);
 				if (codec.acierto(jugadores.indicarConsonante())) {
 					System.out.printf("Acertaste %d consonantes\n", codec.getConLetra());
 					jugadores.sumarSaldo(jugadores.getTurno(), (premio*codec.getConLetra()));
 				}else{
 					System.out.println("Fallaste, perdiste el turno");
 					jugadores.pasarTurno();
+					perdioTurno=true;
 				}
 		}
+		return perdioTurno;
 	}
-
+	
+	public static boolean resolver(Codec codec, Jugadores jugadores){
+		Scanner teclado = new Scanner(System.in, "ISO-8859-1");
+		char op;
+		boolean correcto=false;
+		System.out.println("¿Quieres resolver el panel? (S/N)");
+		op = teclado.nextLine().charAt(0);
+		if (op == 's' || op == 'S') {
+			correcto=codec.comprobarPanel(jugadores.resolverPanel());
+		}
+		return correcto;
+	}
 }

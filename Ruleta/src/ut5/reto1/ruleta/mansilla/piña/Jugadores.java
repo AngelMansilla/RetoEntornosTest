@@ -52,50 +52,44 @@ public class Jugadores {
 	}
 
 	public void sumarSaldo(int id, int saldo) {
-		this.saldo.add(id, (this.saldo.get(id)+saldo));
+		this.saldo.set(id, (this.saldo.get(id)+saldo));
 	}
 
 	public void saldo0(int i) {
-		this.saldo.add(i, 0);
+		this.saldo.set(i, 0);
 	}
 
 	public void actualizarSaldoTotal() {
 		for (int i = 0; i < this.saldoTotal.size(); i++) {
-			this.saldoTotal.add(i, (this.saldo.get(i) + this.saldoTotal.get(i)));
-			this.saldo.add(i, 0);
+			this.saldoTotal.set(i, (this.saldo.get(i) + this.saldoTotal.get(i)));
+			this.saldo.set(i, 0);
 		}
 	}
 
 	public char indicarConsonante() {
-		Pattern pat = Pattern.compile("^([bB-df-hj-np-tv-z-ñÑ]+)$");
-		Matcher mat = null;
 		char consonante;
-		String cadena;
 		do{	
-			cadena=this.teclado.nextLine();
-			consonante=cadena.charAt(0);
-			mat = pat.matcher(cadena);
-			if (!mat.matches()) {
+			consonante=this.teclado.nextLine().toLowerCase().charAt(0);
+			if (ifVocal(consonante)) {
 				System.out.println("Introduce una consonante");
 			}
-		}while(!mat.matches());
+		}while(ifVocal(consonante));
 		return consonante;
 	}
 
 	public char comprarVocal() {
-		Pattern pat = Pattern.compile("^([aeiouAEIOUáéíóúÁÉÍÓÚ]+)$");
-		Matcher mat = null;
 		char vocal;
-		String cadena;
-		do{
-			cadena=this.teclado.nextLine();
-			vocal=cadena.charAt(0);
-			mat = pat.matcher(cadena);
-			if (!mat.matches()) {
-				System.out.println("Introduce una vocal");
+		do{	
+			vocal=this.teclado.nextLine().toLowerCase().charAt(0);
+			if (!ifVocal(vocal)) {
+				System.out.println("Introduce una consonante");
 			}
-		}while(!mat.matches());
+		}while(!ifVocal(vocal));
 		return vocal;
+	}
+	
+	public boolean ifVocal(char letra){
+		return (letra == 'a' || letra == 'e' || letra == 'i' || letra == 'o' || letra == 'u' || letra == 'á' || letra == 'é' || letra == 'í' || letra == 'ó' || letra == 'ú');
 	}
 
 	public String resolverPanel() {
@@ -107,6 +101,10 @@ public class Jugadores {
 	}
 
 	public void pasarTurno() {
-		this.turno = (this.turno == this.nombre.size() - 1) ? 0 : turno++;
+		if (this.turno == (this.nombre.size()-1)) {
+			this.turno = 0;
+		}else{
+			this.turno++;
+		}
 	}
 }
