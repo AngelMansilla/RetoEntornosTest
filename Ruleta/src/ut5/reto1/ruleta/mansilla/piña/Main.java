@@ -3,7 +3,6 @@ package ut5.reto1.ruleta.mansilla.piña;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -30,6 +29,7 @@ public class Main {
 		introducirJugadores(numJugadores, jugadores);
 		jugadores.azarTurno();
 		for (int i = 1; i <= numPaneles; i++) {
+			limpiarpantalla();
 			panelCorrecto = false;
 			paneles.renovarPanel();
 			Codec codec = new Codec(paneles.getPanel());
@@ -232,9 +232,16 @@ public class Main {
 		System.out.printf("Turno de: %s\n", jugadores.getNombre(jugadores.getTurno()));
 	}
 	
+	/**
+	 * Limpia la pantalla despues de 1 segundo, usando la combinacion de teclas control+L
+	 * 
+	 * @throws AWTException 
+	 */
 	public static void limpiarpantalla() throws AWTException {
 		Robot robot = new Robot();
+		robot.delay(1000);
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_L);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
 	}
 }
