@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
+ * Codificación del panel y gestión de este.
  * @author Ángel Mansilla y Carlos Piña
  */
 public class Codec {
@@ -14,29 +14,39 @@ public class Codec {
 	private int contLetra;
 	private Set<Character> letrasDichas;
 
+	/**
+	 * Constructor
+	 * @param panel Panel seleccionado para el juego
+	 */
 	public Codec(String panel) {
 		this.panel = panel;
 		this.contLetra = 0;
 		this.panelCod = "";
 		this.letrasDichas = new HashSet<>();
 	}
-
+	/**
+	 * Devuelve el panel
+	 * @return panel
+	 */
 	public String getPanel() {
 		return panel;
 	}
-
+	/**
+	 * Devuelve el panel codificado
+	 * @return panel codificado
+	 */
 	public String getPanelCod() {
 		return panelCod;
 	}
-
+	
+	/**
+	 * Devuelve la cantidad de letras acertadas
+	 * @return Cantidad de letras acertadas
+	 */
 	public int getContLetra() {
 		return contLetra;
 	}
 
-	public Set<Character> getLetrasDichas() {
-		return letrasDichas;
-	}
-	
 	/**
 	 * Ciframos el panel cambiando las letras por el caracter seleccionado
 	 * para cifrarlo.
@@ -55,6 +65,12 @@ public class Codec {
 		this.panelCod = str.toString();
 	}
 
+	/**
+	 * Comprueba si la letra entra en el panel.
+	 * 
+	 * @param letra La letra para comprobar
+	 * @return si la letra estaba en el panel.
+	 */
 	public boolean acierto(char letra) {
 		StringBuilder str = new StringBuilder(this.panelCod);
 		boolean correcto = false;
@@ -69,19 +85,29 @@ public class Codec {
 					str.replace(i, i + 1, aux);
 					correcto = true;
 					this.contLetra++;
-					this.letrasDichas.add(letra);
 				}
 			}
-
+			this.letrasDichas.add(letra);
 			this.panelCod = str.toString();
 		}
 		return correcto;
 	}
 
+	/**
+	 * Comprueba si el panel es igual a la solucion propuesta.
+	 * 
+	 * @param solucion Solucion del panel
+	 * @return si la solucion es correcta
+	 */
 	public boolean comprobarPanel(String solucion) {
 		return this.panel.equalsIgnoreCase(solucion);
 	}
 	
+	/**
+	 * Comprueba si todas las vocales ya estan dichas.
+	 * 
+	 * @return si las vocales estan dichas
+	 */
 	public boolean vocalesDichas(){
 		return (this.letrasDichas.contains('a') && this.letrasDichas.contains('e') && this.letrasDichas.contains('i') && this.letrasDichas.contains('o') && this.letrasDichas.contains('u'));
 	}

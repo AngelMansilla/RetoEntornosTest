@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- *
+ * La ruleta
  * @author Ángel Mansilla y Carlos Piña
  */
 public class Ruleta {
@@ -13,6 +13,7 @@ public class Ruleta {
 	private Map<Integer, Double> premios;
 
 	/**
+	 * Constructor
 	 * Se guardan los premios de la ruleta (premio,probabilidad), esta debe ser en total un 100% de probabilidad
 	 * Caso de -1 sera la Quiebra
 	 * Caso de -2 sera perder el turno
@@ -35,6 +36,10 @@ public class Ruleta {
 		this.premios.put(-4,5.0);
 	}
 	
+	/**
+	 * Se elige un premio al azar segun las probabilidades que tiene cada premio
+	 * @return premio seleccionado
+	 */
 	public int tirarRuleta(){
 		int probabilidadAnterior=0;
 		double azar = random.nextDouble() * 100 + 1;

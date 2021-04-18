@@ -14,6 +14,11 @@ public class Paneles {
 	private String pista;
 	private Random random;
 
+	/**
+	 * Consturctor 
+	 * Inicializa los paneles disponible con sus pistas.
+	 * 
+	 */
 	public Paneles() {
 		this.random = new Random();
 		this.paneles = new HashMap<>();
@@ -26,7 +31,7 @@ public class Paneles {
 		this.paneles.put("La Gran Muralla, China", "Patrimonio de la humanidad");
 		this.paneles.put("Bulbasaur, Charmander y Squirtle", "Pokemon ");
 		this.paneles.put("Francisco de Goya , Salvador Dalí y  Pablo Picasso", "Personajes ilustres españoles");
-		this.paneles.put("Si el examen dura 90 minutos, te levantas en el 91", "Ibai");
+		this.paneles.put("Bomba, carnaroli y jazmin", "Tres Arroces");
 		this.paneles.put("Nuestro nombre no importa, se nos conoce por nuestros actos", "Batman");
 		this.paneles.put("La vida es como una caja de bombones. Nunca sabes lo que te va a tocar", "Forrest Gump ");
 		this.paneles.put("Toy Story, Cars y Monstruos SA", "Pixar");
@@ -34,14 +39,25 @@ public class Paneles {
 		this.paneles.put("Gryffindor, Hufflepuff, Ravenclaw y Slytheryn", "Harry Potter");
 	}
 
+	/**
+	 * Obtener el panel
+	 * @return panel
+	 */
 	public String getPanel() {
 		return panel;
 	}
-
+	
+	/**
+	 * Obtener la pista
+	 * @return pista
+	 */
 	public String getPista() {
 		return pista;
 	}
-
+	
+	/**
+	 * Renueva el panel y pista, sacandolo del mapa que contiene los paneles y asi no se repitan.
+	 */
 	public void renovarPanel() {
 		int azar = random.nextInt(paneles.size());
 		int cont = 0;
