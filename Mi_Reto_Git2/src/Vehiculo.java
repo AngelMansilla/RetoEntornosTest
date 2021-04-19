@@ -6,8 +6,8 @@
 
 /**
  *
- * @author sarro
+ * @author IES Maestre de Calatrava
  */
 public class Vehiculo {
-	private final static double VELOCIDAD_MAXIMA = 90;
+	private final static double VELOCIDAD_MAXIMA = 100;
 }
