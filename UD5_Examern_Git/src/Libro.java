@@ -12,4 +12,20 @@ public class Libro {
 	protected String isbn;
 	protected String titulo;
 	protected String autor;
+	
+	//Método getIsbn
+	
+	public String getIsbn(){
+		return isbn;
+	}
+
+	//Método getTitulo
+	public String getTitulo() {
+		return titulo;
+	}
+
+	//Método getAutor
+	public String getAutor() {
+		return autor;
+	}
 }
